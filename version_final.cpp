@@ -1,7 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 #include <iostream>
 
 using namespace std;
@@ -26,30 +26,30 @@ void Hora(vector *n)
 
 void Llenar(vector *n)
 {
-     int aux = 0, c = 0 ;
+  int aux = 0, c = 0 ;
 
-     for(int i=0; i<15; i++)
-		(*n).Linea1[i] = 0;
+  for(int i=0; i<15; i++)
+	(*n).Linea1[i] = 0;
 
-	 srand( time(NULL) );
+  srand( time(NULL) );
 
-	 while( c != 15 )
-	 {
-		aux = (rand()%25)+1;
+  while( c != 15 )
+  {
+	  aux = (rand()%25)+1;
 
-        for( int i = 0; i < 15; i++)
-		{
-			if((*n).Linea1[i] == aux)
-				break;
+    for( int i = 0; i < 15; i++)
+	  {
+      if((*n).Linea1[i] == aux)
+			break;
 
-			if((*n).Linea1[i] == 0)
-			{
-				(*n).Linea1[i] = aux;
-				c++;
-				break;
-			}
-		}
-	}
+      if((*n).Linea1[i] == 0)
+        {
+          (*n).Linea1[i] = aux;
+			    c++;
+			    break;
+        }
+    }
+  }
 }
 
 void Mostrar(vector *n)
@@ -103,30 +103,52 @@ void ordenar(vector *n)
    }
 }
 
+void opcion1()
+{
+    vector a;  
+
+    Hora(&a);
+    Llenar(&a);
+    //Mostrar(&a);
+    ordenar(&a);
+    Mostrar(&a);
+}
+
+void opcion2()
+{
+    time_t date;
+    struct tm * time_info;
+    char buffer[80];
+
+    time (&date);
+    time_info = localtime (&date);
+
+    cout << "Integrantes: " << endl;
+    cout << "Felipe Canales Saavedra" << endl;
+    cout << "Javier Reyes Gonzalez" << endl;
+    cout << "Felipe Aracena Carvacho" << endl << endl;
+    strftime (buffer, 80, "Fecha de compilacion: %F", time_info);
+    puts(buffer);
+}
 
 int main(int argc, char *argv[])
 {
-    vector a;
     int i=0,dato=10;
-    char* opc = argv[1];
 
     if (argc == 2)
     {
         if (strcmp(argv[1], "-g") == 0)
         {
-            Hora(&a);
-            Llenar(&a);
-            Mostrar(&a);
-            ordenar(&a);
-            Mostrar(&a);
+            opcion1();
         }
-        else if (strcmp(argv[1], "-v") == 0)
-            cout << "Integrantes: " << endl;
+        else 
+          if (strcmp(argv[1], "-v") == 0)
+              {
+                opcion2(); 
+              }
     }
     else
     {
         cout << "ERROR...FUNCION NO ENCONTRADA" << endl;
     }
-
-    system("pause");
 }
