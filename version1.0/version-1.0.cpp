@@ -19,7 +19,7 @@ void Hora(vector *n)
 
        tiempo = time(NULL);
        tmPtr = localtime(&tiempo);
-       strftime( cad, 20, "%Y-%m-%d %H:%M", tmPtr );
+       strftime( cad, 20, "%Y-%m-%d %H:%M:%S", tmPtr );
 
        strncpy((*n).fecha, cad, 20);
 }
@@ -95,16 +95,35 @@ void ordenar(vector *n)
 }
 
 
-int main()
+int main(int argc, char *argv[])
 {
     vector a;
     int i=0,dato=10;
+    char* opc = argv[1];
 
-    Hora(&a);
-    Llenar(&a);
-    Mostrar(&a);
-    ordenar(&a);
-    Mostrar(&a);
+    if (argc == 2)
+    {
+        if (strcmp(argv[1], "-g") == 0)
+        {
+            Hora(&a);
+            Llenar(&a);
+            Mostrar(&a);
+            ordenar(&a);
+            Mostrar(&a);
+        }
+        else if (strcmp(argv[1], "-v") == 0)
+            cout << "Integrantes: " << endl;
+    }
+    else
+    {
+        cout << "ERROR...FUNCION NO ENCONTRADA" << endl;
+    }
+
+//    Hora(&a);
+//    Llenar(&a);
+//    Mostrar(&a);
+//    ordenar(&a);
+//    Mostrar(&a);
 
     system("pause");
 }
